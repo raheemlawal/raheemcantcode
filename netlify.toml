@@ -6,5 +6,8 @@
   # Next 16 needs >= 20.9; Netlify's default image may still be on 18.
   NODE_VERSION = "20"
 
-# The Next.js Runtime is installed automatically by Netlify when it detects
-# a Next app — no plugin block needed here.
+# Declared explicitly rather than relying on Netlify's auto-detection: this site
+# predates the Next.js Runtime, and without the plugin Netlify serves .next as a
+# static directory, which 404s on every route.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
