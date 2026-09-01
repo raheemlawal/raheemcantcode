@@ -30,6 +30,10 @@ Useful flags on a `Project`:
 
 Site-wide copy (bio, email, socials) lives in **`lib/site.ts`**.
 
+Experience, skills and education live in **`lib/resume.ts`** — same idea, one array
+per section, rendered by the homepage. Keep it in sync with
+`public/Lawal_Raheem_Resume.pdf`, which the header links to.
+
 ## Writing case studies
 
 `PROJECTS.md` is the intake doc — fill in a block there, and it becomes a
@@ -53,6 +57,7 @@ components/
 content/*.mdx              case study prose
 lib/
   projects.ts              source of truth
+  resume.ts                experience, skills, education
   site.ts                  bio, email, socials
 ```
 

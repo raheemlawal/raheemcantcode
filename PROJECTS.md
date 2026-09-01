@@ -109,14 +109,75 @@ The one already on the site. Needs the same treatment or it should come off.
 - **name:** HeemToken
 - **slug:** `heemtoken`
 - **category:** Web
-- **status:**
-- **year:** 2024
-- **stack:** React, Firebase
-- **one-liner:**
-- **links:** repo:
+- **status:** archived
+- **year:** 2021–22 _(résumé: Dec 2021 – Feb 2022, not 2024)_
+- **stack:** Solidity, React, Truffle, Netlify
+- **one-liner:** A BEP-20 token on the Binance chain, plus its info site.
+- **links:** heemtoken.com _(is it still up?)_
 - **problem:**
 - **what it does:**
 - **decisions:**
+- **hardest part:**
+- **outcome:**
+- **media:**
+
+---
+
+## Built By Friday
+
+These three shipped under the agency, so they're grouped under their own heading on
+the index (`org: "Built By Friday"` in `lib/projects.ts`). Table metadata below is
+from the résumé; everything under **problem** is still yours to fill in.
+
+## 5. Dably (Web)
+
+- **name:** Dably
+- **slug:** `dably`
+- **category:** Web
+- **status:** shipped _(engagement ended Dec 2025 — or is "archived" more honest?)_
+- **year:** 2023–25
+- **stack:** React, FastAPI, Supabase, Railway
+- **one-liner:** Education platform — admin suite and user-facing apps.
+- **links:** dably.co
+- **problem:**
+- **what it does:**
+- **my role:** CTO — architected the app suite, designed the CI/CD pipeline across 8
+  repos, managed 5 outsourced engineers from Figma to MVP, ran a 4-figure infra budget
+- **decisions:** _(the CI/CD design across 8 repos is the interview-grade one)_
+- **hardest part:**
+- **outcome:**
+- **media:**
+
+## 6. Too Fast Too Slow (iOS)
+
+- **name:** Too Fast Too Slow
+- **slug:** `too-fast-too-slow`
+- **category:** iOS
+- **status:** live
+- **year:** 2023–
+- **stack:** SwiftUI, Game Center, StoreKit
+- **one-liner:** Reflex game on the App Store, 350k impressions across 5 continents.
+- **links:** apps.apple.com/us/app/too-fast-too-slow/id6471321976
+- **problem:**
+- **what it does:**
+- **decisions:**
+- **hardest part:**
+- **outcome:** 350,000 impressions across 5 continents; beta rounds feed each release
+- **media:**
+
+## 7. Lemonpepper (iOS)
+
+- **name:** Lemonpepper
+- **slug:** `lemonpepper`
+- **category:** iOS
+- **status:** in progress _(no App Store link on the résumé — has it shipped?)_
+- **year:** 2024–
+- **stack:** SwiftUI, FastAPI, GPT-4, HealthKit
+- **one-liner:** Fitness app with an AI running coach, synced to Watch and Garmin.
+- **links:** _(App Store link needed)_
+- **problem:**
+- **what it does:**
+- **decisions:** _(HealthKit → Apple Watch + Garmin ingestion is the meaty one)_
 - **hardest part:**
 - **outcome:**
 - **media:**
@@ -140,9 +201,12 @@ Tell me in / out for each. A portfolio of 4 strong entries beats 8 with filler.
 
 The table needs a header, and case studies need a byline.
 
-- **one-line bio:**
+- **one-line bio:** on the site now, from the résumé — Boeing senior SWE + Built By
+  Friday founder. Rewrite it in your own voice when you get a minute (`lib/site.ts`).
 - **what you're looking for:** (job / freelance / nothing, just showing work)
-- **contact:** email to show publicly? GitHub, LinkedIn, X?
+- **contact:** email + GitHub + résumé PDF are live. LinkedIn/X still TODO in
+  `lib/site.ts` — give me the URLs if you want them public. Phone number is on the
+  résumé PDF but deliberately not in the page HTML.
 - **the name:** is "raheemcantcode" a joke you're committing to on the page, or just the URL?
 
 ---

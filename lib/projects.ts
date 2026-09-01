@@ -38,10 +38,10 @@ export type Project = {
   caseStudy?: boolean;
   /** Hide from the index without deleting the entry */
   draft?: boolean;
+  /** Shipped under an agency/company rather than solo — groups it on the index */
+  org?: "Built By Friday";
 };
 
-// TODO(raheem): every oneLiner below is a placeholder. Fill in PROJECTS.md and
-// these get replaced with the real thing.
 export const projects: Project[] = [
   {
     slug: "electrolyte",
@@ -51,6 +51,7 @@ export const projects: Project[] = [
     year: "2026",
     stack: ["SwiftUI", "Supabase", "Postgres", "APNs"],
     oneLiner: "Language training for athletes, with an adaptive daily plan.",
+    links: [{ label: "electrolyte.app", href: "https://electrolyte.app" }],
     closedSource: true,
     caseStudy: true,
   },
@@ -82,20 +83,60 @@ export const projects: Project[] = [
     name: "HeemToken",
     category: "Web",
     status: "archived",
-    year: "2024",
-    stack: ["React", "Firebase"],
-    oneLiner: "Placeholder — tell me what this was.",
+    year: "2021–22",
+    stack: ["Solidity", "React", "Truffle", "Netlify"],
+    oneLiner: "A BEP-20 token on the Binance chain, plus its info site.",
+    links: [{ label: "heemtoken.com", href: "https://heemtoken.com" }],
+    caseStudy: true,
+  },
+  {
+    slug: "dably",
+    name: "Dably",
+    category: "Web",
+    status: "shipped",
+    year: "2023–25",
+    stack: ["React", "FastAPI", "Supabase", "Railway"],
+    oneLiner: "Education platform — admin suite and user-facing apps.",
+    links: [{ label: "dably.co", href: "https://dably.co" }],
+    org: "Built By Friday",
+  },
+  {
+    slug: "too-fast-too-slow",
+    name: "Too Fast Too Slow",
+    category: "iOS",
+    status: "live",
+    year: "2023–",
+    stack: ["SwiftUI", "Game Center", "StoreKit"],
+    oneLiner: "Reflex game on the App Store, 350k impressions across 5 continents.",
     links: [
       {
-        label: "GitHub",
-        href: "https://github.com/raheemlawal/raheemcantcode",
+        label: "App Store",
+        href: "https://apps.apple.com/us/app/too-fast-too-slow/id6471321976",
       },
     ],
-    caseStudy: true,
+    org: "Built By Friday",
+  },
+  {
+    slug: "lemonpepper",
+    name: "Lemonpepper",
+    category: "iOS",
+    status: "in progress",
+    year: "2024–",
+    stack: ["SwiftUI", "FastAPI", "GPT-4", "HealthKit"],
+    oneLiner: "Fitness app with an AI running coach, synced to Watch and Garmin.",
+    org: "Built By Friday",
   },
 ];
 
 export const visibleProjects = projects.filter((p) => !p.draft);
+
+/** Solo work — the main index table */
+export const soloProjects = visibleProjects.filter((p) => !p.org);
+
+/** Everything shipped under Built By Friday, listed under its own heading */
+export const agencyProjects = visibleProjects.filter(
+  (p) => p.org === "Built By Friday",
+);
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
