@@ -3,7 +3,7 @@ import type { Status } from "@/lib/projects";
 
 export function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[11px] leading-4 text-muted-foreground">
+    <span className="inline-flex items-center rounded border border-border bg-muted px-1.5 py-px font-mono text-[10px] leading-4 text-muted-foreground">
       {children}
     </span>
   );

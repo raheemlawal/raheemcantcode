@@ -6,7 +6,7 @@ export const site = {
   url: "https://raheemcantcode.com",
   role: "Senior Software Engineer",
   description:
-    "Senior software engineer at Boeing, working on satellite backends and the infrastructure behind internal AI models. Founder of Built By Friday, where I ship web and iOS products for clients and for myself.",
+    "Senior software engineer at Boeing — satellites and AI infrastructure. Founder of Built By Friday.",
   email: "lawalraheem@gmail.com",
   socials: [
     { label: "github", href: "https://github.com/raheemlawal" },

@@ -48,7 +48,9 @@ Pre-filled from what I know — **correct anything wrong**, it's from memory, no
 
 - **name:** Electrolyte
 - **slug:** `electrolyte`
-- **category:** iOS
+- **category:** iOS — confirmed Aug 2026. The résumé still lists Electrolyte under
+  "Web Development" with a React/Node/Render stack; that's out of date, and the résumé
+  PDF should be updated to match. The web-side work lives in **Electrolyte CRM**.
 - **status:** in progress — App Store submission
 - **year:** 2026
 - **stack:** SwiftUI, Supabase, Postgres, APNs
@@ -97,25 +99,6 @@ Pre-filled from what I know — **correct anything wrong**, it's from memory, no
 - **problem:**
 - **what it does:**
 - **my role:**
-- **decisions:**
-- **hardest part:**
-- **outcome:**
-- **media:**
-
-## 4. HeemToken (Web)
-
-The one already on the site. Needs the same treatment or it should come off.
-
-- **name:** HeemToken
-- **slug:** `heemtoken`
-- **category:** Web
-- **status:** archived
-- **year:** 2021–22 _(résumé: Dec 2021 – Feb 2022, not 2024)_
-- **stack:** Solidity, React, Truffle, Netlify
-- **one-liner:** A BEP-20 token on the Binance chain, plus its info site.
-- **links:** heemtoken.com _(is it still up?)_
-- **problem:**
-- **what it does:**
 - **decisions:**
 - **hardest part:**
 - **outcome:**

@@ -4,8 +4,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
-  TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { StackTags, StatusDot, Tag } from "@/components/tag";
@@ -13,31 +11,30 @@ import { agencyProjects, soloProjects, type Project } from "@/lib/projects";
 import { education, experience, skills } from "@/lib/resume";
 import { site } from "@/lib/site";
 
-function Section({
-  id,
-  title,
-  children,
-}: {
-  id: string;
-  title: string;
-  children: React.ReactNode;
-}) {
+/**
+ * The index is a single view: everything visible at once on a laptop, no
+ * scrolling. That constraint drives the whole file — three columns, no table
+ * headers, one line of prose per entry. Anything that needs more room belongs
+ * in a case study or the résumé PDF, not here.
+ *
+ * Below `lg` the columns stack and the page scrolls normally; fitting this much
+ * on a phone screen isn't possible and squinting isn't a feature.
+ */
+
+function Heading({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <section aria-labelledby={id} className="mt-16 first:mt-0">
-      <h2
-        id={id}
-        className="mb-3 font-mono text-xs uppercase tracking-widest text-muted-foreground"
-      >
-        {title}
-      </h2>
+    <h2
+      id={id}
+      className="mb-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground"
+    >
       {children}
-    </section>
+    </h2>
   );
 }
 
 /**
- * The row title links to the case study when there is one, and out to the live
- * thing when there isn't — so no row is a dead end.
+ * Links to the case study when there is one, out to the live thing when there
+ * isn't — so no row is a dead end.
  */
 function ProjectTitle({ project }: { project: Project }) {
   const linkClass =
@@ -72,47 +69,23 @@ function ProjectTitle({ project }: { project: Project }) {
 function ProjectTable({ projects }: { projects: Project[] }) {
   return (
     <Table className="border-t border-border">
-      {/* Only one column survives on mobile, so the header earns nothing there. */}
-      <TableHeader className="hidden sm:table-header-group">
-        <TableRow className="hover:bg-transparent">
-          <TableHead className="h-9 px-3 font-mono text-[11px] font-normal uppercase tracking-wider">
-            Project
-          </TableHead>
-          <TableHead className="hidden h-9 px-3 font-mono text-[11px] font-normal uppercase tracking-wider sm:table-cell">
-            Category
-          </TableHead>
-          <TableHead className="hidden h-9 px-3 font-mono text-[11px] font-normal uppercase tracking-wider sm:table-cell">
-            Stack
-          </TableHead>
-          <TableHead className="hidden h-9 px-3 text-right font-mono text-[11px] font-normal uppercase tracking-wider sm:table-cell">
-            Year
-          </TableHead>
-        </TableRow>
-      </TableHeader>
       <TableBody>
         {projects.map((project) => (
           <TableRow key={project.slug} className="group relative">
-            <TableCell className="px-3 py-4 align-top">
-              <span className="flex items-center gap-2">
+            <TableCell className="px-0 py-2 align-top">
+              <span className="flex items-center gap-2 text-[13px]">
                 <StatusDot status={project.status} />
                 <ProjectTitle project={project} />
+                <span className="font-mono text-[11px] tabular-nums text-muted-foreground">
+                  {project.year}
+                </span>
               </span>
-              <span className="mt-1.5 block max-w-sm text-[13px] leading-snug text-muted-foreground">
+              <span className="mt-1 block text-[12px] leading-snug text-muted-foreground">
                 {project.oneLiner}
               </span>
-              {/* Stack has its own column from sm up; inline it on mobile. */}
-              <span className="mt-2.5 flex sm:hidden">
+              <span className="mt-1 flex">
                 <StackTags stack={project.stack} limit={3} />
               </span>
-            </TableCell>
-            <TableCell className="hidden px-3 py-4 align-top font-mono text-xs text-muted-foreground sm:table-cell">
-              {project.category}
-            </TableCell>
-            <TableCell className="hidden px-3 py-4 align-top sm:table-cell">
-              <StackTags stack={project.stack} limit={3} />
-            </TableCell>
-            <TableCell className="hidden px-3 py-4 text-right align-top font-mono text-xs tabular-nums text-muted-foreground sm:table-cell">
-              {project.year}
             </TableCell>
           </TableRow>
         ))}
@@ -123,15 +96,15 @@ function ProjectTable({ projects }: { projects: Project[] }) {
 
 export default function Home() {
   return (
-    <>
-      <header className="mb-14">
-        <h1 className="font-mono text-3xl font-bold tracking-tight sm:text-4xl">
+    <div className="flex h-full flex-col">
+      <header>
+        <h1 className="font-mono text-2xl font-bold tracking-tight sm:text-3xl">
           {site.name}
         </h1>
-        <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
+        <p className="mt-2 max-w-4xl text-[13px] leading-relaxed text-muted-foreground">
           {site.description}
         </p>
-        <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs">
+        <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 font-mono text-[11px]">
           <a
             href={`mailto:${site.email}`}
             className="text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-current"
@@ -153,106 +126,111 @@ export default function Home() {
         </div>
       </header>
 
-      <Section id="work" title="Selected work">
-        <ProjectTable projects={soloProjects} />
-      </Section>
+      <div className="mt-5 grid gap-x-10 gap-y-8 lg:grid-cols-12">
+        <div className="flex flex-col gap-5 lg:col-span-5">
+          <section aria-labelledby="work">
+            <Heading id="work">Selected work</Heading>
+            <ProjectTable projects={soloProjects} />
+          </section>
 
-      <Section id="agency" title="Built By Friday">
-        <p className="-mt-1 mb-4 max-w-xl text-[13px] leading-relaxed text-muted-foreground">
-          My agency. Client and in-house products, shipped since 2021 —{" "}
-          <a
-            href="https://builtbyfriday.com"
-            target="_blank"
-            rel="noreferrer"
-            className="underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-current"
-          >
-            builtbyfriday.com
-          </a>
-          .
-        </p>
-        <ProjectTable projects={agencyProjects} />
-      </Section>
+          <section aria-labelledby="agency">
+            <Heading id="agency">
+              Built By Friday ·{" "}
+              <a
+                href="https://builtbyfriday.com"
+                target="_blank"
+                rel="noreferrer"
+                className="normal-case tracking-normal underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-current"
+              >
+                builtbyfriday.com
+              </a>
+            </Heading>
+            <ProjectTable projects={agencyProjects} />
+          </section>
+        </div>
 
-      <Section id="experience" title="Experience">
-        <ul className="border-t border-border">
-          {experience.map((role) => (
-            <li
-              key={`${role.company}-${role.title}`}
-              className="border-b border-border px-3 py-4"
-            >
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="font-medium">
-                  {role.href ? (
-                    <a
-                      href={role.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="underline decoration-border underline-offset-4 transition-colors hover:decoration-current"
-                    >
-                      {role.company}
-                    </a>
-                  ) : (
-                    role.company
-                  )}
-                  <span className="text-muted-foreground"> · {role.title}</span>
-                </h3>
-                <span className="font-mono text-xs tabular-nums text-muted-foreground">
-                  {role.period}
-                </span>
-              </div>
-              <p className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-muted-foreground">
-                {role.summary}
-              </p>
-              <span className="mt-2.5 flex">
-                <StackTags stack={role.stack} />
-              </span>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      <Section id="skills" title="Skills">
-        <dl className="grid gap-5 border-t border-border pt-4 sm:grid-cols-2">
-          {skills.map((group) => (
-            <div key={group.label}>
-              <dt className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-                {group.label}
-              </dt>
-              <dd className="mt-2 flex flex-wrap gap-1">
-                {group.items.map((item) => (
-                  <Tag key={item}>{item}</Tag>
-                ))}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </Section>
-
-      <Section id="education" title="Education">
-        <ul className="border-t border-border">
-          {education.map((school) => (
-            <li key={school.name} className="border-b border-border px-3 py-4">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="font-medium">
-                  {school.name}
-                  <span className="text-muted-foreground">
-                    {" "}
-                    · {school.degree}
+        <section aria-labelledby="experience" className="lg:col-span-4">
+          <Heading id="experience">Experience</Heading>
+          <ul className="border-t border-border">
+            {experience.map((role) => (
+              <li
+                key={`${role.company}-${role.title}`}
+                className="border-b border-border py-2"
+              >
+                <div className="flex items-baseline justify-between gap-3">
+                  <h3 className="text-[13px] font-medium">
+                    {role.href ? (
+                      <a
+                        href={role.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline decoration-border underline-offset-4 transition-colors hover:decoration-current"
+                      >
+                        {role.company}
+                      </a>
+                    ) : (
+                      role.company
+                    )}
+                  </h3>
+                  <span className="shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
+                    {role.period}
                   </span>
-                </h3>
-                <span className="font-mono text-xs tabular-nums text-muted-foreground">
-                  {school.period}
-                </span>
-              </div>
-              {school.note && (
-                <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
-                  {school.note}
+                </div>
+                <p className="font-mono text-[11px] text-muted-foreground">
+                  {role.title}
                 </p>
-              )}
-            </li>
-          ))}
-        </ul>
-      </Section>
-    </>
+                <p className="mt-1 text-[12px] leading-snug text-muted-foreground">
+                  {role.summary}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <div className="flex flex-col gap-5 lg:col-span-3">
+          <section aria-labelledby="skills">
+            <Heading id="skills">Skills</Heading>
+            <dl className="flex flex-col gap-2.5 border-t border-border pt-2.5">
+              {skills.map((group) => (
+                <div key={group.label}>
+                  <dt className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                    {group.label}
+                  </dt>
+                  <dd className="mt-1.5 flex flex-wrap gap-1">
+                    {group.items.map((item) => (
+                      <Tag key={item}>{item}</Tag>
+                    ))}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+
+          <section aria-labelledby="education">
+            <Heading id="education">Education</Heading>
+            <ul className="border-t border-border">
+              {education.map((school) => (
+                <li key={school.name} className="border-b border-border py-2">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="text-[13px] font-medium">{school.degree}</h3>
+                    <span className="shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
+                      {school.period}
+                    </span>
+                  </div>
+                  <p className="text-[12px] leading-snug text-muted-foreground">
+                    {school.name}
+                  </p>
+                  {school.note && (
+                    <p className="mt-0.5 text-[11px] leading-snug text-muted-foreground/80">
+                      {school.note}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
   );
 }

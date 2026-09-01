@@ -14,7 +14,8 @@ export type Role = {
   period: string;
   /** 3–6 tags, most important first */
   stack: string[];
-  /** Two or three sentences, past tense unless it's current work */
+  /** One line. The index shows everything at once, so it has to stay short —
+   *  full detail lives in the résumé PDF. */
   summary: string;
 };
 
@@ -26,7 +27,7 @@ export const experience: Role[] = [
     period: "2025–",
     stack: ["Python", "Kubernetes", "Docker", "Argo", "TypeScript", "AWS"],
     summary:
-      "Building the distributed framework that stores and moves training data for internal AI models. Hardening the backend for geosynchronous satellites through test-case refactoring and reliability checks, and running the GitLab CI/CD pipeline for a team of ten engineers.",
+      "Distributed data framework for internal AI models, geosynchronous satellite backends, and the CI/CD pipeline for a team of ten.",
   },
   {
     company: "Northrop Grumman",
@@ -35,7 +36,7 @@ export const experience: Role[] = [
     period: "2020–25",
     stack: ["React", "Python", "Vue", "Llama 3", "Electron", "Java"],
     summary:
-      "Led an AI chatbot that answered spacecraft test-interface questions and wrote scripts for hardware engineers. Built an automation platform that gave back 20 hours a month, and a real-time visualization app used by 50 test engineers that cut spacecraft commanding decisions by 15%. Also modernized a 20-year-old legacy desktop system and shipped weekly patches to the spacecraft test interface.",
+      "Led an AI chatbot for spacecraft test queries, an automation platform saving 20 hrs/month, and a real-time visualization app for 50 test engineers that cut commanding decisions 15%.",
   },
   {
     company: "Northrop Grumman",
@@ -44,7 +45,7 @@ export const experience: Role[] = [
     period: "2020–22",
     stack: ["Python", "Real-Time OS", "FPGA", "LabVIEW", "C#"],
     summary:
-      "Led a distributed system of software and embedded hardware that controlled, monitored and analyzed a propelled sled. Wrote a custom C# REST client for an internal server tool that saved eight hours of communication overhead.",
+      "Distributed software and embedded hardware controlling a propelled sled, plus a C# REST client that saved eight hours of overhead.",
   },
   {
     company: "Built By Friday",
@@ -53,7 +54,7 @@ export const experience: Role[] = [
     period: "2021–",
     stack: ["AI", "Automation", "Consulting"],
     summary:
-      "An agency doing automation, development and consulting — website design, custom software, architecture, data analytics and blockchain. Composed and closed multiple four-figure contracts on both one-time and recurring terms.",
+      "AI agency: automation, custom software, architecture and consulting. Multiple four-figure contracts, one-time and recurring.",
   },
 ];
 
