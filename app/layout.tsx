@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -47,9 +46,6 @@ export default function RootLayout({
             <span>
               © {new Date().getFullYear()} {site.name}
             </span>
-            <Link href="/" className="transition-colors hover:text-foreground">
-              index
-            </Link>
             {site.socials.map((s) => (
               <a
                 key={s.href}
