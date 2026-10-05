@@ -61,30 +61,25 @@ export const projects: Project[] = [
     closedSource: true,
     caseStudy: true,
   },
+
+  // Built By Friday. Order here is the order they render under the agency
+  // heading, so it is deliberate rather than alphabetical.
   {
-    slug: "rignest",
-    name: "RigNest",
-    category: "Web",
+    slug: "too-fast-too-slow",
+    name: "Too Fast Too Slow",
+    category: "iOS",
     status: "live",
-    year: "2026",
-    stack: ["React", "Supabase", "Vercel"],
-    oneLiner: "Fleet and payroll operations for contractors.",
-    links: [{ label: "app.rignest.io", href: "https://app.rignest.io" }],
-    closedSource: true,
-    caseStudy: true,
-  },
-  {
-    // Renamed from "Electrolyte CRM" in Sep 2026. The slug stays as-is on
-    // purpose: the URL is already live and indexed.
-    slug: "electrolyte-crm",
-    name: "Electrolyte HQ",
-    category: "Web",
-    status: "in progress",
-    year: "2026",
-    stack: ["Next.js", "Supabase", "TypeScript"],
-    oneLiner: "Internal hub: sales pipeline, engineering tickets and events.",
-    closedSource: true,
-    caseStudy: true,
+    year: "2023–",
+    stack: ["SwiftUI", "Game Center", "StoreKit"],
+    oneLiner:
+      "Reflex game on the App Store, 350k impressions across 5 continents.",
+    links: [
+      {
+        label: "App Store",
+        href: "https://apps.apple.com/us/app/too-fast-too-slow/id6471321976",
+      },
+    ],
+    org: "Built By Friday",
   },
   {
     slug: "dably",
@@ -98,22 +93,6 @@ export const projects: Project[] = [
     org: "Built By Friday",
   },
   {
-    slug: "too-fast-too-slow",
-    name: "Too Fast Too Slow",
-    category: "iOS",
-    status: "live",
-    year: "2023–",
-    stack: ["SwiftUI", "Game Center", "StoreKit"],
-    oneLiner: "Reflex game on the App Store, 350k impressions across 5 continents.",
-    links: [
-      {
-        label: "App Store",
-        href: "https://apps.apple.com/us/app/too-fast-too-slow/id6471321976",
-      },
-    ],
-    org: "Built By Friday",
-  },
-  {
     slug: "lemonpepper",
     name: "Lemonpepper",
     category: "iOS",
@@ -122,6 +101,37 @@ export const projects: Project[] = [
     stack: ["SwiftUI", "FastAPI", "GPT-4", "HealthKit"],
     oneLiner: "Fitness app with an AI running coach, synced to Watch and Garmin.",
     org: "Built By Friday",
+  },
+  {
+    slug: "rignest",
+    name: "RigNest",
+    category: "Web",
+    status: "live",
+    year: "2026",
+    stack: ["React", "Supabase", "Vercel"],
+    oneLiner: "Fleet and payroll operations for contractors.",
+    links: [{ label: "app.rignest.io", href: "https://app.rignest.io" }],
+    closedSource: true,
+    caseStudy: true,
+    org: "Built By Friday",
+  },
+
+  // Off the index as of Oct 2026. `draft` keeps the entry and
+  // content/electrolyte-crm.mdx in the repo but stops rendering the row and
+  // stops generating /work/electrolyte-crm. Flip it back to restore both.
+  {
+    // Renamed from "Electrolyte CRM" in Sep 2026. The slug stays as-is on
+    // purpose: the URL was already live and indexed.
+    slug: "electrolyte-crm",
+    name: "Electrolyte HQ",
+    category: "Web",
+    status: "in progress",
+    year: "2026",
+    stack: ["Next.js", "Supabase", "TypeScript"],
+    oneLiner: "Internal hub: sales pipeline, engineering tickets and events.",
+    closedSource: true,
+    caseStudy: true,
+    draft: true,
   },
 ];
 

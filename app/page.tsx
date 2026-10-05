@@ -1,31 +1,33 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-} from "@/components/ui/table";
 import { StackTags, StatusDot, Tag } from "@/components/tag";
 import { agencyProjects, soloProjects, type Project } from "@/lib/projects";
 import { education, experience, skills } from "@/lib/resume";
 import { site } from "@/lib/site";
 
 /**
- * The index is a single view: everything visible at once on a laptop, no
- * scrolling. That constraint drives the whole file — three columns, no table
- * headers, one line of prose per entry. Anything that needs more room belongs
- * in a case study or the résumé PDF, not here.
+ * The index carries three things at once: projects, employment, and the résumé
+ * facts. The job is making it obvious which is which at a glance.
  *
- * Below `lg` the columns stack and the page scrolls normally; fitting this much
- * on a phone screen isn't possible and squinting isn't a feature.
+ * Hierarchy is doing that work, in three steps and no more. A section heading
+ * sits in foreground against a rule; an entry title is 14px foreground; every
+ * piece of supporting detail is muted and smaller. Nesting (Built By Friday and
+ * its projects) is shown by indentation off a left rule rather than a fourth
+ * type size, because a fourth size stops reading as a level and starts reading
+ * as noise.
+ *
+ * It no longer tries to fit one laptop screen without scrolling. That
+ * constraint is what pushed everything to 11px and made the page hard to
+ * follow, which was the actual complaint.
+ *
+ * Below `lg` the three columns stack and it reads as one list.
  */
 
 function Heading({ id, children }: { id: string; children: React.ReactNode }) {
   return (
     <h2
       id={id}
-      className="mb-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground"
+      className="border-b border-border pb-2 font-mono text-[11px] font-medium uppercase tracking-widest text-foreground"
     >
       {children}
     </h2>
@@ -38,7 +40,7 @@ function Heading({ id, children }: { id: string; children: React.ReactNode }) {
  */
 function ProjectTitle({ project }: { project: Project }) {
   const linkClass =
-    "font-medium underline decoration-border underline-offset-4 transition-colors after:absolute after:inset-0 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+    "underline decoration-border underline-offset-4 transition-colors after:absolute after:inset-0 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
   if (project.caseStudy) {
     return (
@@ -63,48 +65,46 @@ function ProjectTitle({ project }: { project: Project }) {
     );
   }
 
-  return <span className="font-medium">{project.name}</span>;
+  return <span>{project.name}</span>;
 }
 
-function ProjectTable({ projects }: { projects: Project[] }) {
+/**
+ * Years are pushed right so they line up into a scannable column, the same way
+ * the Experience and Education lists align their periods.
+ */
+function ProjectRow({ project }: { project: Project }) {
   return (
-    <Table className="border-t border-border">
-      <TableBody>
-        {projects.map((project) => (
-          <TableRow key={project.slug} className="group relative">
-            <TableCell className="px-0 py-2 align-top">
-              <span className="flex items-center gap-2 text-[13px]">
-                <StatusDot status={project.status} />
-                <ProjectTitle project={project} />
-                <span className="font-mono text-[11px] tabular-nums text-muted-foreground">
-                  {project.year}
-                </span>
-              </span>
-              <span className="mt-1 block text-[12px] leading-snug text-muted-foreground">
-                {project.oneLiner}
-              </span>
-              <span className="mt-1 flex">
-                <StackTags stack={project.stack} limit={3} />
-              </span>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <li className="group relative border-b border-border py-3 last:border-b-0">
+      <div className="flex items-baseline gap-2">
+        <StatusDot status={project.status} className="self-center" />
+        <h3 className="text-[14px] font-medium">
+          <ProjectTitle project={project} />
+        </h3>
+        <span className="ml-auto shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
+          {project.year}
+        </span>
+      </div>
+      <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">
+        {project.oneLiner}
+      </p>
+      <div className="mt-2">
+        <StackTags stack={project.stack} />
+      </div>
+    </li>
   );
 }
 
 export default function Home() {
   return (
-    <div className="flex h-full flex-col">
-      <header>
+    <div>
+      <header className="border-b border-border pb-7">
         <h1 className="font-mono text-2xl font-bold tracking-tight sm:text-3xl">
           {site.name}
         </h1>
-        <p className="mt-2 max-w-4xl text-[13px] leading-relaxed text-muted-foreground">
+        <p className="mt-2.5 max-w-2xl text-[14px] leading-relaxed text-muted-foreground">
           {site.description}
         </p>
-        <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 font-mono text-[11px]">
+        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1.5 font-mono text-[11px]">
           <a
             href={`mailto:${site.email}`}
             className="text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-current"
@@ -126,39 +126,55 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="mt-5 grid gap-x-10 gap-y-8 lg:grid-cols-12">
-        <div className="flex flex-col gap-5 lg:col-span-5">
-          <section aria-labelledby="work">
-            <Heading id="work">Selected work</Heading>
-            <ProjectTable projects={soloProjects} />
-          </section>
+      <div className="mt-9 grid gap-x-12 gap-y-12 lg:grid-cols-12">
+        <section aria-labelledby="projects" className="lg:col-span-5">
+          <Heading id="projects">Projects</Heading>
 
-          <section aria-labelledby="agency">
-            <Heading id="agency">
-              Built By Friday ·{" "}
+          <ul>
+            {soloProjects.map((project) => (
+              <ProjectRow key={project.slug} project={project} />
+            ))}
+          </ul>
+
+          {/* Built By Friday is an entry in this list that happens to contain
+              other entries, so it is indented under its own label rather than
+              promoted to a second section. */}
+          <div className="mt-7">
+            <div className="flex items-baseline gap-2.5 border-b border-border pb-2">
+              <h3 className="font-mono text-[12px] font-medium">
+                Built By Friday
+              </h3>
               <a
                 href="https://builtbyfriday.com"
                 target="_blank"
                 rel="noreferrer"
-                className="normal-case tracking-normal underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-current"
+                className="inline-flex items-center gap-0.5 font-mono text-[11px] text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-current"
               >
                 builtbyfriday.com
+                <ArrowUpRight className="size-3" aria-hidden />
               </a>
-            </Heading>
-            <ProjectTable projects={agencyProjects} />
-          </section>
-        </div>
+              <span className="ml-auto shrink-0 font-mono text-[11px] text-muted-foreground">
+                agency
+              </span>
+            </div>
+            <ul className="border-l border-border pl-4">
+              {agencyProjects.map((project) => (
+                <ProjectRow key={project.slug} project={project} />
+              ))}
+            </ul>
+          </div>
+        </section>
 
         <section aria-labelledby="experience" className="lg:col-span-4">
           <Heading id="experience">Experience</Heading>
-          <ul className="border-t border-border">
+          <ul>
             {experience.map((role) => (
               <li
                 key={`${role.company}-${role.title}`}
-                className="border-b border-border py-2"
+                className="border-b border-border py-3 last:border-b-0"
               >
                 <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="text-[13px] font-medium">
+                  <h3 className="text-[14px] font-medium">
                     {role.href ? (
                       <a
                         href={role.href}
@@ -176,7 +192,7 @@ export default function Home() {
                     {role.period}
                   </span>
                 </div>
-                <p className="font-mono text-[11px] text-muted-foreground">
+                <p className="mt-0.5 font-mono text-[11px] text-muted-foreground">
                   {role.title}
                   {role.priorTitle && (
                     <span className="text-muted-foreground/70">
@@ -185,7 +201,7 @@ export default function Home() {
                     </span>
                   )}
                 </p>
-                <p className="mt-1 text-[12px] leading-snug text-muted-foreground">
+                <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
                   {role.summary}
                 </p>
               </li>
@@ -193,16 +209,16 @@ export default function Home() {
           </ul>
         </section>
 
-        <div className="flex flex-col gap-5 lg:col-span-3">
+        <div className="flex flex-col gap-10 lg:col-span-3">
           <section aria-labelledby="skills">
             <Heading id="skills">Skills</Heading>
-            <dl className="flex flex-col gap-2.5 border-t border-border pt-2.5">
+            <dl className="flex flex-col gap-4 pt-3">
               {skills.map((group) => (
                 <div key={group.label}>
                   <dt className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
                     {group.label}
                   </dt>
-                  <dd className="mt-1.5 flex flex-wrap gap-1">
+                  <dd className="mt-2 flex flex-wrap gap-1">
                     {group.items.map((item) => (
                       <Tag key={item}>{item}</Tag>
                     ))}
@@ -214,20 +230,23 @@ export default function Home() {
 
           <section aria-labelledby="education">
             <Heading id="education">Education</Heading>
-            <ul className="border-t border-border">
+            <ul>
               {education.map((school) => (
-                <li key={school.name} className="border-b border-border py-2">
+                <li
+                  key={school.name}
+                  className="border-b border-border py-3 last:border-b-0"
+                >
                   <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="text-[13px] font-medium">{school.degree}</h3>
+                    <h3 className="text-[14px] font-medium">{school.degree}</h3>
                     <span className="shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
                       {school.period}
                     </span>
                   </div>
-                  <p className="text-[12px] leading-snug text-muted-foreground">
+                  <p className="mt-0.5 text-[13px] leading-relaxed text-muted-foreground">
                     {school.name}
                   </p>
                   {school.note && (
-                    <p className="mt-0.5 text-[11px] leading-snug text-muted-foreground/80">
+                    <p className="mt-1 text-[12px] leading-relaxed text-muted-foreground/80">
                       {school.note}
                     </p>
                   )}
