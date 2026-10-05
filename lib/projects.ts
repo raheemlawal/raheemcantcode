@@ -35,9 +35,11 @@ export type Project = {
   /** 3–6 tags, most important first */
   stack: string[];
   /**
-   * The description shown on the card. Carries the quantitative detail now
-   * that there are no case-study pages behind these entries, so a couple of
-   * lines rather than a caption. Only put a number here that has a source.
+   * One sentence on what the thing is. Deliberately carries no metrics: the
+   * numbers available across these entries measured six different things
+   * (users, impressions, repos, contracts, market cap), so side by side they
+   * could not be compared and stopped being worth scanning. Keep it
+   * descriptive.
    */
   oneLiner: string;
   /** Shown on the case-study page, not the table */
@@ -71,7 +73,7 @@ export const projects: Project[] = [
     year: "2026–",
     stack: ["SwiftUI", "Supabase", "Postgres", "APNs"],
     oneLiner:
-      "Adaptive iOS language training for athletes. 120+ users across 38 nationalities, with 144 reviewed scenarios in four languages.",
+      "iOS language training for athletes, with an adaptive daily plan.",
     links: [
       {
         label: "App Store",
@@ -90,7 +92,7 @@ export const projects: Project[] = [
     year: "2021–",
     stack: ["Software", "Architecture", "Consulting"],
     oneLiner:
-      "Software development and consulting firm. Custom software, architecture and automation. Multiple four-figure contracts, one-time and recurring.",
+      "Software development and consulting firm: custom software, architecture and automation.",
     links: [{ label: "builtbyfriday.com", href: "https://builtbyfriday.com" }],
     group: "venture",
   },
@@ -104,7 +106,7 @@ export const projects: Project[] = [
     year: "2026",
     stack: ["React", "Supabase", "Vercel"],
     oneLiner:
-      "Fleet and payroll operations for contractors. Effective-dated pay rates, PTO accrual and metered billing, verified against 41 historical settlements.",
+      "Fleet and payroll operations for contractors, with effective-dated pay rates and a driver portal.",
     links: [{ label: "rignest.io", href: "https://rignest.io" }],
     closedSource: true,
   },
@@ -132,7 +134,7 @@ export const projects: Project[] = [
     year: "2023–",
     stack: ["SwiftUI", "Game Center", "StoreKit"],
     oneLiner:
-      "Reflex game on the App Store. 350k impressions across 5 continents.",
+      "Reflex timing game on the App Store.",
     links: [
       {
         label: "App Store",
@@ -148,7 +150,7 @@ export const projects: Project[] = [
     year: "2023–25",
     stack: ["React", "FastAPI", "Supabase", "Railway"],
     oneLiner:
-      "Education platform. CTO for the admin suite and user-facing apps, CI/CD across 8 repos, managing 5 engineers.",
+      "Education platform. CTO for the admin suite and the user-facing apps.",
     links: [{ label: "dably.co", href: "https://dably.co" }],
   },
   {
@@ -159,7 +161,7 @@ export const projects: Project[] = [
     year: "2021–22",
     stack: ["Solidity", "React", "Truffle", "Netlify"],
     oneLiner:
-      "BEP-20 token on Binance Chain with its own information site. $150 initial market cap.",
+      "BEP-20 token on Binance Chain, with its own information site.",
     links: [{ label: "heemtoken.com", href: "https://heemtoken.com" }],
   },
 
