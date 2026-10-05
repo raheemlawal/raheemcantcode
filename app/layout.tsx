@@ -41,9 +41,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-dvh antialiased`}
       >
-        <div className="mx-auto flex min-h-dvh max-w-2xl flex-col px-6 py-12 sm:px-8 sm:py-16">
+        <div className="mx-auto flex min-h-dvh max-w-7xl flex-col px-5 py-5 sm:px-6 sm:py-6">
           <main className="flex-1">{children}</main>
-          <footer className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border pt-4 font-mono text-[11px] text-muted-foreground">
+          <footer className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border pt-2.5 font-mono text-[11px] text-muted-foreground">
             <span>
               © {new Date().getFullYear()} {site.name}
             </span>

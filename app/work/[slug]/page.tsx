@@ -48,7 +48,7 @@ export default async function CaseStudy({
   const { default: Body } = await import(`@/content/${slug}.mdx`);
 
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="mx-auto w-full max-w-2xl">
       <Link
         href="/"
         className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
