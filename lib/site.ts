@@ -4,10 +4,10 @@
 export const site = {
   name: "Raheem Lawal",
   url: "https://raheemcantcode.com",
-  role: "Senior Software Engineer",
+  role: "Software Engineer",
   description:
-    "Senior software engineer at Boeing, working on satellites and AI " +
-    "infrastructure. Founder of Built By Friday.",
+    "Software engineer. Full-stack and iOS, across aerospace, sports tech, " +
+    "ed tech and blockchain.",
   email: "lawalraheem@gmail.com",
   socials: [
     { label: "github", href: "https://github.com/raheemlawal" },

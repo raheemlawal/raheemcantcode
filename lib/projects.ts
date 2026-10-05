@@ -9,7 +9,13 @@
  * or the build will fail (loudly, on purpose — better than a dead link).
  */
 
-export type Category = "iOS" | "Web" | "Backend" | "Tool" | "Experiment";
+export type Category =
+  | "iOS"
+  | "Web"
+  | "Backend"
+  | "Tool"
+  | "Experiment"
+  | "Agency";
 
 export type Status = "live" | "in progress" | "shipped" | "archived";
 
@@ -38,11 +44,17 @@ export type Project = {
   caseStudy?: boolean;
   /** Hide from the index without deleting the entry */
   draft?: boolean;
-  /** Shipped under an agency/company rather than solo — groups it on the index */
-  org?: "Built By Friday";
+  /**
+   * "venture" is a business I run; everything else is a project. The index
+   * renders them as two separate sections, which is why Built By Friday
+   * appears exactly once, as a venture, and never as a heading over the
+   * projects it produced.
+   */
+  group?: "venture";
 };
 
 export const projects: Project[] = [
+  // Ventures — the businesses.
   {
     slug: "electrolyte",
     name: "Electrolyte",
@@ -60,10 +72,22 @@ export const projects: Project[] = [
     ],
     closedSource: true,
     caseStudy: true,
+    group: "venture",
+  },
+  {
+    slug: "built-by-friday",
+    name: "Built By Friday",
+    category: "Agency",
+    status: "live",
+    year: "2021–",
+    stack: ["AI", "Automation", "Consulting"],
+    oneLiner:
+      "AI agency: automation, custom software, architecture and consulting.",
+    links: [{ label: "builtbyfriday.com", href: "https://builtbyfriday.com" }],
+    group: "venture",
   },
 
-  // Built By Friday. Order here is the order they render under the agency
-  // heading, so it is deliberate rather than alphabetical.
+  // Projects. Order is deliberate, newest-feeling first, oldest last.
   {
     slug: "too-fast-too-slow",
     name: "Too Fast Too Slow",
@@ -79,7 +103,6 @@ export const projects: Project[] = [
         href: "https://apps.apple.com/us/app/too-fast-too-slow/id6471321976",
       },
     ],
-    org: "Built By Friday",
   },
   {
     slug: "dably",
@@ -90,7 +113,6 @@ export const projects: Project[] = [
     stack: ["React", "FastAPI", "Supabase", "Railway"],
     oneLiner: "Education platform with an admin suite and user-facing apps.",
     links: [{ label: "dably.co", href: "https://dably.co" }],
-    org: "Built By Friday",
   },
   {
     slug: "lemonpepper",
@@ -100,7 +122,6 @@ export const projects: Project[] = [
     year: "2024–",
     stack: ["SwiftUI", "FastAPI", "GPT-4", "HealthKit"],
     oneLiner: "Fitness app with an AI running coach, synced to Watch and Garmin.",
-    org: "Built By Friday",
   },
   {
     slug: "rignest",
@@ -113,7 +134,16 @@ export const projects: Project[] = [
     links: [{ label: "app.rignest.io", href: "https://app.rignest.io" }],
     closedSource: true,
     caseStudy: true,
-    org: "Built By Friday",
+  },
+  {
+    slug: "heemtoken",
+    name: "HeemToken",
+    category: "Experiment",
+    status: "archived",
+    year: "2021–22",
+    stack: ["Solidity", "React", "Truffle", "Netlify"],
+    oneLiner: "BEP-20 token on Binance Chain, with its own information site.",
+    links: [{ label: "heemtoken.com", href: "https://heemtoken.com" }],
   },
 
   // Off the index as of Oct 2026. `draft` keeps the entry and
@@ -137,13 +167,11 @@ export const projects: Project[] = [
 
 export const visibleProjects = projects.filter((p) => !p.draft);
 
-/** Solo work — the main index table */
-export const soloProjects = visibleProjects.filter((p) => !p.org);
+/** The businesses: Electrolyte and Built By Friday */
+export const ventures = visibleProjects.filter((p) => p.group === "venture");
 
-/** Everything shipped under Built By Friday, listed under its own heading */
-export const agencyProjects = visibleProjects.filter(
-  (p) => p.org === "Built By Friday",
-);
+/** Everything else: products, experiments and things built for the fun of it */
+export const sideProjects = visibleProjects.filter((p) => p.group !== "venture");
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
