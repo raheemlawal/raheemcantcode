@@ -68,7 +68,7 @@ export const projects: Project[] = [
     name: "Electrolyte",
     category: "iOS",
     status: "live",
-    year: "2026",
+    year: "2026–",
     stack: ["SwiftUI", "Supabase", "Postgres", "APNs"],
     oneLiner:
       "Adaptive iOS language training for athletes. 120+ users across 38 nationalities, with 144 reviewed scenarios in four languages.",
@@ -88,9 +88,9 @@ export const projects: Project[] = [
     category: "Agency",
     status: "live",
     year: "2021–",
-    stack: ["AI", "Automation", "Consulting"],
+    stack: ["Software", "Architecture", "Consulting"],
     oneLiner:
-      "AI agency: automation, custom software, architecture and consulting. Multiple four-figure contracts, one-time and recurring.",
+      "Software development and consulting firm. Custom software, architecture and automation. Multiple four-figure contracts, one-time and recurring.",
     links: [{ label: "builtbyfriday.com", href: "https://builtbyfriday.com" }],
     group: "venture",
   },
@@ -105,18 +105,24 @@ export const projects: Project[] = [
     stack: ["React", "Supabase", "Vercel"],
     oneLiner:
       "Fleet and payroll operations for contractors. Effective-dated pay rates, PTO accrual and metered billing, verified against 41 historical settlements.",
-    links: [{ label: "app.rignest.io", href: "https://app.rignest.io" }],
+    links: [{ label: "rignest.io", href: "https://rignest.io" }],
     closedSource: true,
   },
   {
     slug: "lemonpepper",
     name: "Lemonpepper",
     category: "iOS",
-    status: "in progress",
-    year: "2024–",
+    status: "shipped",
+    year: "2025",
     stack: ["SwiftUI", "FastAPI", "GPT-4", "HealthKit"],
     oneLiner:
       "Fitness app with an AI running coach, synced to Apple Watch and Garmin.",
+    links: [
+      {
+        label: "App Store",
+        href: "https://apps.apple.com/us/app/lemonpepper/id6742935987",
+      },
+    ],
   },
   {
     slug: "too-fast-too-slow",

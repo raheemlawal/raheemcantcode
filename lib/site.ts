@@ -7,7 +7,7 @@ export const site = {
   role: "Software Engineer",
   description:
     "Software engineer. Full-stack and iOS, across aerospace, sports tech, " +
-    "ed tech and blockchain.",
+    "education and blockchain.",
   email: "lawalraheem@gmail.com",
   socials: [
     { label: "github", href: "https://github.com/raheemlawal" },

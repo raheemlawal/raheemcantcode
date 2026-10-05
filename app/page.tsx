@@ -114,7 +114,7 @@ function ProjectRow({ project }: { project: Project }) {
 export default function Home() {
   return (
     <div>
-      <header className="mb-2.5 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+      <header className="mb-2 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
         <div>
           <h1 className="font-mono text-xl font-bold tracking-tight sm:text-2xl">
             {site.name}
@@ -185,7 +185,7 @@ export default function Home() {
           </ul>
         </Card>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5">
           <Card id="ventures" title="Ventures">
             <ul>
               {ventures.map((project) => (
@@ -237,7 +237,7 @@ export default function Home() {
           </Card>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5">
           <Card
             id="projects"
             title="Projects"
