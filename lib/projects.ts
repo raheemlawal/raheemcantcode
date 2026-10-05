@@ -34,13 +34,21 @@ export type Project = {
   year: string;
   /** 3–6 tags, most important first */
   stack: string[];
-  /** ~10 words for the table row */
+  /**
+   * The description shown on the card. Carries the quantitative detail now
+   * that there are no case-study pages behind these entries, so a couple of
+   * lines rather than a caption. Only put a number here that has a source.
+   */
   oneLiner: string;
   /** Shown on the case-study page, not the table */
   links?: ProjectLink[];
   /** Renders "closed source" instead of a repo link */
   closedSource?: boolean;
-  /** Requires content/<slug>.mdx to exist */
+  /**
+   * Generates /work/<slug> from content/<slug>.mdx. Switched off for every
+   * entry in Oct 2026 — the detail moved into `oneLiner` instead. The prose is
+   * still in content/, so setting this back to true restores the page.
+   */
   caseStudy?: boolean;
   /** Hide from the index without deleting the entry */
   draft?: boolean;
@@ -54,7 +62,7 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-  // Ventures — the businesses.
+  // Ventures — the businesses. Newest first, like every other card.
   {
     slug: "electrolyte",
     name: "Electrolyte",
@@ -62,7 +70,8 @@ export const projects: Project[] = [
     status: "live",
     year: "2026",
     stack: ["SwiftUI", "Supabase", "Postgres", "APNs"],
-    oneLiner: "iOS language training for athletes, with an adaptive daily plan.",
+    oneLiner:
+      "Adaptive iOS language training for athletes. 120+ users across 38 nationalities, with 144 reviewed scenarios in four languages.",
     links: [
       {
         label: "App Store",
@@ -71,7 +80,6 @@ export const projects: Project[] = [
       { label: "electrolyte.app", href: "https://electrolyte.app" },
     ],
     closedSource: true,
-    caseStudy: true,
     group: "venture",
   },
   {
@@ -82,12 +90,34 @@ export const projects: Project[] = [
     year: "2021–",
     stack: ["AI", "Automation", "Consulting"],
     oneLiner:
-      "AI agency: automation, custom software, architecture and consulting.",
+      "AI agency: automation, custom software, architecture and consulting. Multiple four-figure contracts, one-time and recurring.",
     links: [{ label: "builtbyfriday.com", href: "https://builtbyfriday.com" }],
     group: "venture",
   },
 
-  // Projects. Order is deliberate, newest-feeling first, oldest last.
+  // Projects, newest first.
+  {
+    slug: "rignest",
+    name: "RigNest",
+    category: "Web",
+    status: "live",
+    year: "2026",
+    stack: ["React", "Supabase", "Vercel"],
+    oneLiner:
+      "Fleet and payroll operations for contractors. Effective-dated pay rates, PTO accrual and metered billing, verified against 41 historical settlements.",
+    links: [{ label: "app.rignest.io", href: "https://app.rignest.io" }],
+    closedSource: true,
+  },
+  {
+    slug: "lemonpepper",
+    name: "Lemonpepper",
+    category: "iOS",
+    status: "in progress",
+    year: "2024–",
+    stack: ["SwiftUI", "FastAPI", "GPT-4", "HealthKit"],
+    oneLiner:
+      "Fitness app with an AI running coach, synced to Apple Watch and Garmin.",
+  },
   {
     slug: "too-fast-too-slow",
     name: "Too Fast Too Slow",
@@ -96,7 +126,7 @@ export const projects: Project[] = [
     year: "2023–",
     stack: ["SwiftUI", "Game Center", "StoreKit"],
     oneLiner:
-      "Reflex game on the App Store, 350k impressions across 5 continents.",
+      "Reflex game on the App Store. 350k impressions across 5 continents.",
     links: [
       {
         label: "App Store",
@@ -111,29 +141,9 @@ export const projects: Project[] = [
     status: "shipped",
     year: "2023–25",
     stack: ["React", "FastAPI", "Supabase", "Railway"],
-    oneLiner: "Education platform with an admin suite and user-facing apps.",
+    oneLiner:
+      "Education platform. CTO for the admin suite and user-facing apps, CI/CD across 8 repos, managing 5 engineers.",
     links: [{ label: "dably.co", href: "https://dably.co" }],
-  },
-  {
-    slug: "lemonpepper",
-    name: "Lemonpepper",
-    category: "iOS",
-    status: "in progress",
-    year: "2024–",
-    stack: ["SwiftUI", "FastAPI", "GPT-4", "HealthKit"],
-    oneLiner: "Fitness app with an AI running coach, synced to Watch and Garmin.",
-  },
-  {
-    slug: "rignest",
-    name: "RigNest",
-    category: "Web",
-    status: "live",
-    year: "2026",
-    stack: ["React", "Supabase", "Vercel"],
-    oneLiner: "Fleet and payroll operations for contractors.",
-    links: [{ label: "app.rignest.io", href: "https://app.rignest.io" }],
-    closedSource: true,
-    caseStudy: true,
   },
   {
     slug: "heemtoken",
@@ -142,16 +152,14 @@ export const projects: Project[] = [
     status: "archived",
     year: "2021–22",
     stack: ["Solidity", "React", "Truffle", "Netlify"],
-    oneLiner: "BEP-20 token on Binance Chain, with its own information site.",
+    oneLiner:
+      "BEP-20 token on Binance Chain with its own information site. $150 initial market cap.",
     links: [{ label: "heemtoken.com", href: "https://heemtoken.com" }],
   },
 
   // Off the index as of Oct 2026. `draft` keeps the entry and
-  // content/electrolyte-crm.mdx in the repo but stops rendering the row and
-  // stops generating /work/electrolyte-crm. Flip it back to restore both.
+  // content/electrolyte-crm.mdx in the repo but stops it rendering.
   {
-    // Renamed from "Electrolyte CRM" in Sep 2026. The slug stays as-is on
-    // purpose: the URL was already live and indexed.
     slug: "electrolyte-crm",
     name: "Electrolyte HQ",
     category: "Web",
@@ -160,7 +168,6 @@ export const projects: Project[] = [
     stack: ["Next.js", "Supabase", "TypeScript"],
     oneLiner: "Internal hub: sales pipeline, engineering tickets and events.",
     closedSource: true,
-    caseStudy: true,
     draft: true,
   },
 ];

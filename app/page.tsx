@@ -193,21 +193,6 @@ export default function Home() {
               ))}
             </ul>
           </Card>
-
-          <Card
-            id="projects"
-            title="Projects"
-            note="Mostly built under Built By Friday. Some products, some experiments."
-          >
-            <ul>
-              {sideProjects.map((project) => (
-                <ProjectRow key={project.slug} project={project} />
-              ))}
-            </ul>
-          </Card>
-        </div>
-
-        <div className="flex flex-col gap-2">
           <Card id="skills" title="Skills">
             <dl className="flex flex-col gap-2.5">
               {skills.map((group) => (
@@ -247,6 +232,20 @@ export default function Home() {
                     </p>
                   )}
                 </li>
+              ))}
+            </ul>
+          </Card>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <Card
+            id="projects"
+            title="Projects"
+            note="Mostly built under Built By Friday. Some products, some experiments."
+          >
+            <ul>
+              {sideProjects.map((project) => (
+                <ProjectRow key={project.slug} project={project} />
               ))}
             </ul>
           </Card>

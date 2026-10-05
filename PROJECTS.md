@@ -44,7 +44,7 @@ architecture and decisions are almost always safe, customer names and schemas us
 
 ## 1. Electrolyte (iOS)
 
-**WRITTEN — live at `/work/electrolyte`, prose in `content/electrolyte.mdx`.** Drafted from
+**CASE STUDY RETIRED Oct 2026** — the page at `/work/electrolyte` is gone; detail moved into the card description. Prose kept in `content/electrolyte.mdx`. Drafted from
 project memory + the repos, scoped to architecture and decisions only (no client names,
 no schemas, no revenue). Read it and correct anything I got wrong; the fields below are
 the raw notes it came from.
@@ -73,7 +73,7 @@ the raw notes it came from.
 
 ## 2. RigNest (Web)
 
-**WRITTEN — live at `/work/rignest`, prose in `content/rignest.mdx`.** The customer is
+**CASE STUDY RETIRED Oct 2026** — the page at `/work/rignest` is gone; detail moved into the card description. Prose kept in `content/rignest.mdx`. The customer is
 never named on the page, deliberately.
 
 - **name:** RigNest
@@ -94,7 +94,7 @@ never named on the page, deliberately.
 
 ## 3. Electrolyte HQ (Web)
 
-**WRITTEN — live at `/work/electrolyte-crm`, prose in `content/electrolyte-crm.mdx`.**
+**OFF THE SITE Oct 2026** — drafted out entirely. Prose kept in `content/electrolyte-crm.mdx`.
 Renamed CRM → HQ in Sep 2026; the display name now says HQ, the slug stays `electrolyte-crm`
 because that URL is already live and indexed.
 
