@@ -103,7 +103,7 @@ export const projects: Project[] = [
     name: "RigNest",
     category: "Web",
     status: "live",
-    year: "2026",
+    year: "2026–",
     stack: ["React", "Supabase", "Vercel"],
     oneLiner:
       "Fleet and payroll operations for contractors, with effective-dated pay rates and a driver portal.",
