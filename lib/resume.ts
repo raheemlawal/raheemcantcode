@@ -101,7 +101,7 @@ export const education: School[] = [
     name: "University of Illinois Urbana-Champaign",
     degree: "MS Management",
     period: "2024–26",
-    note: "Cozad New Venture Challenge — Commitment to Entrepreneurship prize",
+    note: "Cozad New Venture Challenge, Commitment to Entrepreneurship prize",
   },
   {
     name: "George Mason University",

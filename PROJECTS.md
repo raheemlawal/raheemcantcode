@@ -44,7 +44,10 @@ architecture and decisions are almost always safe, customer names and schemas us
 
 ## 1. Electrolyte (iOS)
 
-Pre-filled from what I know — **correct anything wrong**, it's from memory, not the code.
+**WRITTEN — live at `/work/electrolyte`, prose in `content/electrolyte.mdx`.** Drafted from
+project memory + the repos, scoped to architecture and decisions only (no client names,
+no schemas, no revenue). Read it and correct anything I got wrong; the fields below are
+the raw notes it came from.
 
 - **name:** Electrolyte
 - **slug:** `electrolyte`
@@ -70,6 +73,9 @@ Pre-filled from what I know — **correct anything wrong**, it's from memory, no
 
 ## 2. RigNest (Web)
 
+**WRITTEN — live at `/work/rignest`, prose in `content/rignest.mdx`.** The customer is
+never named on the page, deliberately.
+
 - **name:** RigNest
 - **slug:** `rignest`
 - **category:** Web
@@ -86,7 +92,11 @@ Pre-filled from what I know — **correct anything wrong**, it's from memory, no
 - **outcome:**
 - **media:**
 
-## 3. Electrolyte CRM (Web)
+## 3. Electrolyte HQ (Web)
+
+**WRITTEN — live at `/work/electrolyte-crm`, prose in `content/electrolyte-crm.mdx`.**
+Renamed CRM → HQ in Sep 2026; the display name now says HQ, the slug stays `electrolyte-crm`
+because that URL is already live and indexed.
 
 - **name:**
 - **slug:** `electrolyte-crm`
@@ -167,30 +177,35 @@ from the résumé; everything under **problem** is still yours to fill in.
 
 ---
 
-## Undecided — do these go on?
+## Still open
 
-Tell me in / out for each. A portfolio of 4 strong entries beats 8 with filler.
+Everything on the index is written. What's left:
 
-- **Sorbet** — spec + live schema, no Swift yet. In-progress entries can work if the
-  write-up is about the design thinking, but only if you actually intend to build it.
-- **Language Dashboard** — Next.js language learning app. Does it overlap Electrolyte
-  enough to be confusing?
-- **This site** — some people list the portfolio itself. Cute or self-indulgent, your call.
-- Anything older, from work, or non-code that belongs here and I don't know about.
+1. **Read the three case studies.** They were drafted from my project memory and the
+   repos, not dictated by you. Anything that misremembers a decision, or says more about
+   a customer than you want said, change it or tell me.
+2. **The résumé PDF is out of date.** It still files Electrolyte under "Web Development"
+   with a React/Node/Render stack. Electrolyte is iOS; the web work is Electrolyte HQ.
+   The site and the PDF now disagree, and the PDF is the one that's wrong.
+3. **LinkedIn / X** — still the only `TODO` in `lib/site.ts`. Give me the URLs if you
+   want them public; otherwise I'll delete the comment and we're done.
+4. **No case studies for the Built By Friday three.** Dably, Too Fast Too Slow and
+   Lemonpepper are table rows with no `caseStudy: true`, so they aren't clickable. Dably's
+   CI/CD across 8 repos and Lemonpepper's Watch + Garmin ingestion are both worth a page
+   if you want them.
+5. **Lemonpepper has no App Store link** — has it shipped?
+6. **Dably says `shipped`** — the engagement ended Dec 2025. Is `archived` more honest?
 
----
+Settled, for the record:
 
-## About you
-
-The table needs a header, and case studies need a byline.
-
-- **one-line bio:** on the site now, from the résumé — Boeing senior SWE + Built By
-  Friday founder. Rewrite it in your own voice when you get a minute (`lib/site.ts`).
-- **what you're looking for:** (job / freelance / nothing, just showing work)
-- **contact:** email + GitHub + résumé PDF are live. LinkedIn/X still TODO in
-  `lib/site.ts` — give me the URLs if you want them public. Phone number is on the
-  résumé PDF but deliberately not in the page HTML.
-- **the name:** is "raheemcantcode" a joke you're committing to on the page, or just the URL?
+- **What the site is for:** showing work. No hire-me line, no ask. That's the framing the
+  write-ups use.
+- **Disclosure:** architecture and decisions. Engineering specifics stay in (the 48s
+  transcript finalisation lag, 41 byte-identical settlements, 144 items across 31
+  cohorts). Customer names, schemas and revenue stay out.
+- **HeemToken:** off the site.
+- **Sorbet / Language Dashboard / this site:** off, for now. Sorbet has no Swift written;
+  Language Dashboard overlaps Electrolyte enough to confuse.
 
 ---
 

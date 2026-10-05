@@ -1,22 +1,64 @@
-{/* PLACEHOLDER — replace from the matching block in PROJECTS.md.
-    Metadata (name, stack, year, links) lives in lib/projects.ts, not here. */}
-
 ## The problem
 
-TODO — what was broken or missing, and for whom.
+Electrolyte sells to football clubs and academies. That pipeline lived in an
+Excel sheet, and the sheet had no answer to the only question that matters on a
+given morning: who do I contact today. Sales is also not my trained background,
+which set the bar. The tool had to make that call, not render it as a decision.
 
 ## What it does
 
-TODO — the product in two or three sentences.
+An internal hub with three sections. Sales is the CRM proper: organisations,
+contacts, deals, pipeline, sequences. Engineering is native ticket tracking, no
+third-party sync. Events treats conferences and tournaments as sources of
+opportunity, with discovery feeding a review queue. Over the top sits a Today
+view that picks the work.
 
 ## How it works
 
-TODO — the 2–4 technical decisions you'd defend in an interview, and why.
+**The tool decides the priority.** Scoring runs in SQL and feeds the Today view.
+The point of replacing a spreadsheet was never nicer rows, it was removing the
+daily judgement call about who to contact. A CRM whose answer is a sortable
+table has relocated the spreadsheet, not replaced it.
+
+**Quick capture beats structured forms.** A command-palette capture takes messy
+notes in whatever shape they arrive, and a synthesiser turns them into
+structured records. Forms are where CRMs go to die: filling one in correctly at
+the end of a call takes discipline nobody reliably has, the data rots, and then
+the tool gets abandoned for being wrong. Better to accept the mess and do the
+structuring in software.
+
+**AI discovery is off by default and lands in a queue.** Web-search event
+discovery costs real money per run and produces confident wrong answers.
+Suggested records are reviewed before they become real ones. Same shape as the
+content pipeline on the iOS side: generation proposes, a human disposes.
+
+**Row-level security on, API auto-exposure off.** Tables are not published to
+the API automatically and RLS is mandatory, so every migration has to grant
+access explicitly to authenticated users and never to anonymous ones. Access
+becomes something you write down rather than something you inherit by default
+and discover later.
 
 ## The hardest part
 
-TODO — the bug, constraint or dead end you fought. Specifics beat adjectives.
+Finding out that an earlier build of this app had been running against the
+production database of the main product, writing its own tables alongside live
+user data.
+
+Nothing crashed. There was no error to find. A connection string pointed at the
+wrong project and quietly worked for weeks, which is the failure mode that
+scares me most, because the only symptom is that everything is fine. It had
+accumulated real records by then, so the fix was not deletion. It was standing
+up a dedicated project, merging those rows into the import from the spreadsheet
+so none of the real work was lost, then dropping the stray tables from
+production.
+
+The import itself was the other piece of genuine work. A parser turns the Excel
+export into a reviewable bundle with a preview to read before anything is
+written to the database. An import that goes straight in is an import you find
+out was wrong afterwards, against data you no longer have a clean copy of.
 
 ## Outcome
 
-TODO — users, scale, revenue, status. Honest is better than impressive.
+In progress. Every planned phase is built and sitting on a branch waiting for
+verification; the first phase is merged, with the schema, authentication and the
+spreadsheet import in place. Not yet deployed.

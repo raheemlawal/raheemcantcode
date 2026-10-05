@@ -1,22 +1,90 @@
-{/* PLACEHOLDER — replace from the matching block in PROJECTS.md.
-    Metadata (name, stack, year, links) lives in lib/projects.ts, not here. */}
-
 ## The problem
 
-TODO — what was broken or missing, and for whom.
+Trucking contractors run payroll on spreadsheets, and the pay structure is
+genuinely complicated. Drivers are paid per mile, per trip, per day or hourly,
+often several of those at once, with bonuses above mileage thresholds and splits
+between team drivers. On top of that, every pay change in a spreadsheet is
+retroactive by accident, because a spreadsheet has no concept of when a rate
+started.
 
 ## What it does
 
-TODO — the product in two or three sentences.
+A web app for fleet operations: dispatch, vehicles, maintenance, inspections,
+fuel, compliance, and the part that carries the most weight, payroll.
+Settlements come in, driver pay is computed against each driver's terms, and
+paystubs and notifications go out. Drivers get their own portal for pay history,
+documents and time off.
 
 ## How it works
 
-TODO — the 2–4 technical decisions you'd defend in an interview, and why.
+**Effective-dated rates as a whole set, not per column.** A raise is a new row
+carrying the driver's entire rate set with an inclusive start and end date, not
+an update to a column. "What was this driver paid under on this date" becomes a
+single lookup, instead of resolving each column independently and risking an
+answer that straddles two changes and describes a rate combination that never
+existed. Overlapping windows for one driver are made impossible by an exclusion
+constraint in the database, not by a check in application code.
+
+**Payroll resolves as of the settlement date; display reads the current value.**
+The drivers table kept its rate columns, as the current value for display and as
+the fallback for anyone with no rate rows at all. So adding effective dating
+changed nothing for any driver who had not used it yet. A nightly job rolls that
+denormalised value forward when a scheduled change becomes current, and it
+touches only display, never what is paid.
+
+**Rates travel as JSON, not twenty positional arguments.** The set will grow. A
+wide function signature has to be dropped and recreated every time it does,
+which had already happened to a different function in this codebase for exactly
+that reason. Known-key reads off a JSON payload survive the next four fields.
+
+**Authorisation lives in the database, not the interface.** Writes go through
+security-definer functions that check permissions themselves; the UI's
+permission check only decides what to render. The useful consequence shows up in
+the driver portal: a driver reading their own pay history sees past and current
+windows but not future scheduled ones. A raise the office has not announced yet
+is not the function's to disclose, and if that rule lived in the UI it would be
+one request away from being bypassed.
+
+**Immutable history for anything that touches money.** Time-off grants, usage,
+cancellations, adjustments, carryover and expiry are all rows, never overwrites.
+Cancelling approved time off restores the balance and preserves the original
+request. The moment a past week's pay can be silently recomputed, the records
+stop being evidence of what happened.
 
 ## The hardest part
 
-TODO — the bug, constraint or dead end you fought. Specifics beat adjectives.
+A feature that looked finished and was not.
+
+The compensation rules table had effective-start and effective-end columns and
+had read as implemented for a long time. The function that computes payroll
+never referenced either one. Dated rules silently applied to every week,
+including weeks before they existed. Nobody had caught it because the presence
+of the columns was doing a convincing impression of the feature working.
+
+The verification mattered more than the fix. This change touched the function
+that decides what every driver is paid, so "it looks right" was not a standard I
+could ship against. I fingerprinted the payroll preview output for every
+settlement in the system, hashing the driver rows, before touching anything.
+Then I backfilled every driver with their current values, effective from a date
+earlier than the oldest trip in the system, and re-ran it. All 41 settlements
+came back byte-identical, which was the only acceptable result: new machinery,
+zero change to historical pay. Then the positive test, splitting one driver's
+window at a date with a raise and confirming the old rate resolved the day
+before and the new one the day after, with past settlements untouched.
+
+The first attempt at the resolver failed to compile on a reference to a driver's
+first name, and that error turned out to be the valuable part. It meant the
+resolver had to return *every* column the calling functions read off their driver
+alias, not just the pay terms. Following that thread surfaced four more pay
+terms the plan had missed entirely. Shipping without them would have meant a
+raise taking effect only partly on its effective date, which is worse than
+having no effective dating at all. One is visibly absent; the other is quietly
+wrong.
 
 ## Outcome
 
-TODO — users, scale, revenue, status. Honest is better than impressive.
+Live, and used for payroll every week. Shipped since: configurable time-off and
+holiday pay with a grant engine, recurring payroll adjustments, metered
+subscription billing with single-use pilot codes, a dashboard of operational
+widgets, and the marketing site itself, moved off a hosted page builder onto its
+own deploy.

@@ -1,28 +1,99 @@
-{/* PLACEHOLDER — replace from the Electrolyte block in PROJECTS.md.
-    Metadata (name, stack, year, links) lives in lib/projects.ts, not here.
-    This file is the prose only. */}
-
 ## The problem
 
-TODO — what was broken or missing, and for whom.
+Footballers move countries mid-career and have to function in a dressing room
+in a language they do not speak. Generic language apps teach you to order
+coffee. They do not teach you to understand a tactical instruction shouted
+across a pitch at half time, and the vocabulary that actually matters is
+specific to a sport, a position and a situation.
 
 ## What it does
 
-TODO — the product in two or three sentences.
+A SwiftUI iOS app that builds each player a daily session: words, phrases,
+drills, and a scenario where they hear a line spoken in context and answer out
+loud. Progress is tracked per language, so a player learning two at once has two
+independent ladders. Clubs get an admin console on the web. The phone is the
+only place learning happens.
 
 ## How it works
 
-TODO — the 2–4 technical decisions you'd defend in an interview, and why you
-made them. Candidates from what I know: the adaptive training algorithm, the
-scenario content pipeline, server-side timezone-aware notification scheduling
-instead of local notifications.
+**One learning surface, on purpose.** The web app started out as a learning
+surface too. I collapsed it into an org-admin console and made iOS the only
+place training happens. Two surfaces meant building every content type twice,
+and the phone is where a player actually is.
+
+**A mastery ladder with time decay, not a score.** Items move through
+introduced, recognized, recalled, applied, retained, and decay with time since
+the last correct attempt. That is deliberately separate from the spaced
+repetition schedule, which answers a different question: not how well you know
+this, but when you should see it again. On top sit adaptive dials. Rolling
+first-try accuracy over the last fifty attempts sets how many reviews a session
+carries and whether known items come first. A fast unaided answer stretches the
+review interval by half; an assisted or slow one halves it.
+
+**Self-rating at onboarding, not a placement test.** A placement test is a wall
+at signup. A self-rating sets *pacing*, how quickly new items arrive and where
+difficulty starts, and never seeds item mastery. Nothing claims you have
+demonstrated something you have not. Existing users were grandfathered rather
+than retro-placed, on the theory that a better algorithm re-levels them
+naturally.
+
+**AI generates context; humans own the language.** Scenario scenes, images and
+voice lines are generated per cohort, meaning sport by situation by language.
+The target-language lines themselves are constrained to a human-curated phrase
+bank, and every generated item lands in a review queue before it can reach a
+player. An LLM judge scores each one first and auto-rejects exactly two critical
+failures, wrong language and reversed speaker roles. It never auto-approves.
+
+**Media is cached per cohort, not per user.** Generating a scene image and voice
+line for every player would have been the obvious personalisation and the wrong
+cost curve. One image and one audio file serve everyone in that cohort;
+personalisation is a prompt overlay on top.
+
+**New content types ship behind a client capability flag.** When a lighter
+mid-session activity was added, it was gated on a flag the client sends with its
+request. Builds already in the App Store never receive an activity type they
+cannot render, which would have broken the session on an empty default branch.
+That pattern got reused for everything since.
 
 ## The hardest part
 
-TODO — the challenge-scoring race is a strong candidate: transcript
-finalization lagged call-end past the client's timeout, so valid attempts were
-scored as "too short". Worth writing up how you diagnosed it and what you chose.
+Live conversation challenges kept returning "too short to score" after full,
+real conversations.
+
+The transcript was never short. A call's transcript only lands in the provider's
+conversation history once the conversation *finalises*, and finalisation lags the
+end of the call by a variable amount. I watched one call sit at processing with
+zero messages eight seconds after hanging up, and reach done with eleven
+messages at forty-eight seconds. Meanwhile the backend scored synchronously and
+the app gave up at forty-five. So the scorer read a transcript containing the
+agent's opening line, and correctly concluded there was nothing to grade.
+
+The first fix was backend-only: poll longer, keep the fullest transcript seen,
+and break when the status reads done rather than the instant any message
+appears. That last detail was the actual bug in the loop, which had been bailing
+on the first message and therefore reliably capturing only the opener. It fixed
+calls that finalise inside thirty seconds and could not fix the rest, because a
+forty-five second client timeout is a ceiling no server change can get above.
+The real fix needed the app: a longer client timeout, and a server poll window
+sized to stay under the hosting platform's own edge limit.
+
+Worth saying what I did not do. The robust version of this is a post-call
+webhook that scores when the transcript finalises and delivers the result
+asynchronously, with no timeout race to lose. That is the correct architecture
+and it was the wrong amount of work for a bug whose measured worst case was
+forty-eight seconds. It is written down for when concurrency makes it true.
+
+Two silent failures from the content pipeline are worth recording too. Passing a
+language code where the prompt wanted a spelled-out language name produced
+Spanish lines in every English batch. And without an explicit brief per
+situation, generated scenes drifted toward the locker room no matter which
+situation was requested. Neither showed up in a single test. Both were obvious
+the moment I read a batch of thirty in one sitting.
 
 ## Outcome
 
-TODO — users, scale, App Store status. "Not shipped yet" is a fine answer.
+Live on the App Store. The scenario library is 144 reviewed
+items with cached audio across 31 cohorts in English, Spanish, French and
+German, all of it through the review queue. Content growth runs nightly: cohorts
+that are thin and have active learners get fresh items queued as pending, so the
+library grows without the review queue stopping being the gate.
