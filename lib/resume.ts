@@ -10,6 +10,9 @@ export type Role = {
   company: string;
   href?: string;
   title: string;
+  /** Earlier title at the same employer, when one tenure covered both. The
+   *  résumé PDF dates the tenure, not each title, so don't invent a split. */
+  priorTitle?: string;
   /** "2025–" for current, "2020–25" for past */
   period: string;
   /** 3–6 tags, most important first */
@@ -33,19 +36,19 @@ export const experience: Role[] = [
     company: "Northrop Grumman",
     href: "https://northropgrumman.com",
     title: "Software Engineer",
+    priorTitle: "Associate Software Engineer",
     period: "2020–25",
-    stack: ["React", "Python", "Vue", "Llama 3", "Electron", "Java"],
+    stack: [
+      "React",
+      "Python",
+      "Vue",
+      "Llama 3",
+      "Electron",
+      "Real-Time OS",
+      "FPGA",
+    ],
     summary:
-      "Led an AI chatbot for spacecraft test queries, an automation platform saving 20 hrs/month, and a real-time visualization app for 50 test engineers that cut commanding decisions 15%.",
-  },
-  {
-    company: "Northrop Grumman",
-    href: "https://northropgrumman.com",
-    title: "Associate Software Engineer",
-    period: "2020–22",
-    stack: ["Python", "Real-Time OS", "FPGA", "LabVIEW", "C#"],
-    summary:
-      "Distributed software and embedded hardware controlling a propelled sled, plus a C# REST client that saved eight hours of overhead.",
+      "Led an AI chatbot for spacecraft test queries, an automation platform saving 20 hrs/month, and a real-time visualization app for 50 test engineers that cut commanding decisions 15%. Started on distributed software and embedded hardware controlling a propelled sled.",
   },
   {
     company: "Built By Friday",

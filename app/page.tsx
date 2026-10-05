@@ -178,6 +178,12 @@ export default function Home() {
                 </div>
                 <p className="font-mono text-[11px] text-muted-foreground">
                   {role.title}
+                  {role.priorTitle && (
+                    <span className="text-muted-foreground/70">
+                      {" "}
+                      (prev. {role.priorTitle})
+                    </span>
+                  )}
                 </p>
                 <p className="mt-1 text-[12px] leading-snug text-muted-foreground">
                   {role.summary}
