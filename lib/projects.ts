@@ -85,6 +85,31 @@ export const projects: Project[] = [
     group: "venture",
   },
   {
+    slug: "rignest",
+    name: "RigNest",
+    category: "Web",
+    status: "live",
+    year: "2026–",
+    stack: ["React", "Supabase", "Vercel"],
+    oneLiner:
+      "Fleet and payroll operations for contractors, with effective-dated pay rates and a driver portal.",
+    links: [{ label: "rignest.io", href: "https://rignest.io" }],
+    closedSource: true,
+    group: "venture",
+  },
+  {
+    slug: "dably",
+    name: "Dably",
+    category: "Web",
+    status: "shipped",
+    year: "2023–25",
+    stack: ["React", "FastAPI", "Supabase", "Railway"],
+    oneLiner:
+      "Education platform. CTO for the admin suite and the user-facing apps.",
+    links: [{ label: "dably.co", href: "https://dably.co" }],
+    group: "venture",
+  },
+  {
     slug: "built-by-friday",
     name: "Built By Friday",
     category: "Agency",
@@ -98,18 +123,6 @@ export const projects: Project[] = [
   },
 
   // Projects, newest first.
-  {
-    slug: "rignest",
-    name: "RigNest",
-    category: "Web",
-    status: "live",
-    year: "2026–",
-    stack: ["React", "Supabase", "Vercel"],
-    oneLiner:
-      "Fleet and payroll operations for contractors, with effective-dated pay rates and a driver portal.",
-    links: [{ label: "rignest.io", href: "https://rignest.io" }],
-    closedSource: true,
-  },
   {
     slug: "lemonpepper",
     name: "Lemonpepper",
@@ -141,17 +154,6 @@ export const projects: Project[] = [
         href: "https://apps.apple.com/us/app/too-fast-too-slow/id6471321976",
       },
     ],
-  },
-  {
-    slug: "dably",
-    name: "Dably",
-    category: "Web",
-    status: "shipped",
-    year: "2023–25",
-    stack: ["React", "FastAPI", "Supabase", "Railway"],
-    oneLiner:
-      "Education platform. CTO for the admin suite and the user-facing apps.",
-    links: [{ label: "dably.co", href: "https://dably.co" }],
   },
   {
     slug: "heemtoken",

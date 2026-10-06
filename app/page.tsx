@@ -193,23 +193,6 @@ export default function Home() {
               ))}
             </ul>
           </Card>
-          <Card id="skills" title="Skills">
-            <dl className="flex flex-col gap-2.5">
-              {skills.map((group) => (
-                <div key={group.label}>
-                  <dt className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/80">
-                    {group.label}
-                  </dt>
-                  <dd className="mt-1 flex flex-wrap gap-1">
-                    {group.items.map((item) => (
-                      <Tag key={item}>{item}</Tag>
-                    ))}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </Card>
-
           <Card id="education" title="Education">
             <ul>
               {education.map((school) => (
@@ -248,6 +231,22 @@ export default function Home() {
                 <ProjectRow key={project.slug} project={project} />
               ))}
             </ul>
+          </Card>
+          <Card id="skills" title="Skills">
+            <dl className="flex flex-col gap-2.5">
+              {skills.map((group) => (
+                <div key={group.label}>
+                  <dt className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/80">
+                    {group.label}
+                  </dt>
+                  <dd className="mt-1 flex flex-wrap gap-1">
+                    {group.items.map((item) => (
+                      <Tag key={item}>{item}</Tag>
+                    ))}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </Card>
         </div>
       </div>
