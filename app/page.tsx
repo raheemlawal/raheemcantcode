@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { StackTags, StatusDot, Tag } from "@/components/tag";
-import { sideProjects, ventures, type Project } from "@/lib/projects";
+import {
+  isOngoing,
+  sideProjects,
+  ventures,
+  type Project,
+} from "@/lib/projects";
 import { education, experience, skills } from "@/lib/resume";
 import { site } from "@/lib/site";
 
@@ -93,7 +98,7 @@ function ProjectRow({ project }: { project: Project }) {
   return (
     <li className="group relative border-b border-border/70 py-1.5 first:pt-0 last:border-b-0 last:pb-0">
       <div className="flex items-baseline gap-1.5">
-        <StatusDot status={project.status} className="self-center" />
+        <StatusDot ongoing={isOngoing(project)} className="self-center" />
         <h3 className="text-[13px] font-medium">
           <ProjectTitle project={project} />
         </h3>

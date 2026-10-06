@@ -193,6 +193,17 @@ export const ventures = visibleProjects.filter((p) => p.group === "venture");
 /** Everything else: products, experiments and things built for the fun of it */
 export const sideProjects = visibleProjects.filter((p) => p.group !== "venture");
 
+/**
+ * Still running, as told by the year. A trailing en dash ("2026–") means
+ * ongoing; a closed range ("2023–25") or a single year ("2025") means finished.
+ *
+ * Derived rather than stored so the status dot can never contradict the dates
+ * printed next to it.
+ */
+export function isOngoing(project: Project): boolean {
+  return project.year.trimEnd().endsWith("–");
+}
+
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }

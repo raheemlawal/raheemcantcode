@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { StackTags, StatusDot } from "@/components/tag";
-import { getProject, projects } from "@/lib/projects";
+import { getProject, isOngoing, projects } from "@/lib/projects";
 
 type Params = { slug: string };
 
@@ -68,7 +68,7 @@ export default async function CaseStudy({
         <dl className="mt-7 grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 font-mono text-xs">
           <dt className="text-muted-foreground">Status</dt>
           <dd className="flex items-center gap-2">
-            <StatusDot status={project.status} />
+            <StatusDot ongoing={isOngoing(project)} />
             {project.status}
             <span className="text-muted-foreground">· {project.year}</span>
           </dd>

@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import type { Status } from "@/lib/projects";
 
 export function Tag({ children }: { children: React.ReactNode }) {
   return (
@@ -29,27 +28,26 @@ export function StackTags({
   );
 }
 
-const statusColor: Record<Status, string> = {
-  live: "bg-emerald-500",
-  "in progress": "bg-amber-500",
-  shipped: "bg-sky-500",
-  archived: "bg-neutral-400",
-};
-
+/**
+ * Green if the work is still running, grey if it is finished. Deliberately two
+ * states: an earlier version had four colours and no legend on the page, so the
+ * extra ones were decoration nobody could decode.
+ */
 export function StatusDot({
-  status,
+  ongoing,
   className,
 }: {
-  status: Status;
+  ongoing: boolean;
   className?: string;
 }) {
+  const label = ongoing ? "ongoing" : "finished";
   return (
     <span
-      title={status}
-      aria-label={status}
+      title={label}
+      aria-label={label}
       className={cn(
         "inline-block size-1.5 shrink-0 rounded-full",
-        statusColor[status],
+        ongoing ? "bg-emerald-500" : "bg-neutral-400",
         className,
       )}
     />
