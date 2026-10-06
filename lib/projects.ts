@@ -74,12 +74,14 @@ export const projects: Project[] = [
     stack: ["SwiftUI", "Supabase", "Postgres", "APNs"],
     oneLiner:
       "iOS language training for athletes, with an adaptive daily plan.",
+    // Only links[0] is rendered on a card (ProjectTitle uses it as the
+    // destination), so order matters: electrolytegroup.com is the one shown.
     links: [
+      { label: "electrolytegroup.com", href: "https://electrolytegroup.com" },
       {
         label: "App Store",
         href: "https://apps.apple.com/us/app/electrolyte-language-sport/id6783455523",
       },
-      { label: "electrolyte.app", href: "https://electrolyte.app" },
     ],
     closedSource: true,
     group: "venture",
