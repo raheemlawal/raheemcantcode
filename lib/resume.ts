@@ -31,9 +31,9 @@ export const experience: Role[] = [
     title: "Senior Software Engineer",
     period: "2025–",
     bullets: [
-      "Distributed framework to store and transfer data for internal AI models (Argo, Python, Docker, Kubernetes).",
-      "Improved geosynchronous satellite backend software through test-case refactoring, reliability checks and codebase remodeling (TypeScript, Python, AWS S3).",
-      "Lead the DevOps CI/CD pipeline used by a team of ten engineers (GitLab).",
+      "Build a distributed framework storing and transferring 1TB of training data for internal AI models (Argo, Python, Docker, Kubernetes).",
+      "Harden geosynchronous satellite backend software through test-case refactoring and codebase remodeling, increasing coverage by 60% (TypeScript, Python, AWS S3).",
+      "Own the DevOps CI/CD pipeline for a team of 10 engineers, cutting deployment time by 10 minutes (GitLab).",
     ],
   },
   {
@@ -44,13 +44,13 @@ export const experience: Role[] = [
     title: "Software Engineer + Associate Software Engineer",
     period: "2020–25",
     bullets: [
-      "Led a full-stack AI web chatbot (React, Python, Llama 3) for hardware engineers querying the spacecraft test interface and developing scripts.",
+      "Deployed a full-stack AI chatbot (React, Python, Llama 3, RAG) letting hardware engineers query spacecraft test interfaces and generate test scripts on demand.",
       "Led a custom full-stack web application (React, Python) automating internal engineering scripts and tasks, saving 20 hours a month.",
-      "Led a real-time full-stack data visualization application (Vue, Python) used by 50 test engineers, cutting spacecraft commanding decisions by 15%.",
-      "Desktop application (TypeScript, Vue, Electron) modernizing a 20+ year-old legacy system.",
-      "Weekly patches for a multi-layered spacecraft test interface (Java, SQL).",
-      "Distributed system of software (Python, Real-Time OS, FPGA, LabVIEW) and embedded hardware to control, monitor and analyze a propelled sled.",
-      "Custom REST API client (C#) for an internal server tool, improving communication by eight hours.",
+      "Built and led a real-time web data visualization platform (Vue, Python) for 50 test engineers, reducing spacecraft commanding decision latency by 15%.",
+      "Modernized a 20-year-old legacy system into a desktop application (TypeScript, Vue, Electron).",
+      "Shipped weekly patches for a multi-layered spacecraft test interface (Java, SQL).",
+      "Delivered a distributed control system across software and embedded hardware to monitor and analyze a propelled sled (Python, Real-Time OS, FPGA, LabVIEW).",
+      "Built a custom REST API client (C#) for an internal server tool, saving 8 hours per week.",
     ],
   },
 ];
@@ -69,7 +69,6 @@ export const skills = [
       "Vue",
       "Solidity",
       "SQL",
-      "RAG",
     ],
   },
   {
@@ -96,7 +95,7 @@ export type School = {
 export const education: School[] = [
   {
     name: "University of Illinois Urbana-Champaign",
-    degree: "MS Business Management",
+    degree: "MS Management",
     period: "2024–26",
     note: "Cozad New Venture Challenge, Commitment to Entrepreneurship prize",
   },

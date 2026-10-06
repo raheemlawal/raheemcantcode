@@ -114,10 +114,10 @@ export const projects: Project[] = [
     name: "Built By Friday",
     category: "Agency",
     status: "live",
-    year: "2021–",
-    stack: ["Software", "Architecture", "Consulting"],
+    year: "2022–",
+    stack: ["React", "TypeScript", "Python", "Supabase"],
     oneLiner:
-      "Software development and consulting firm: custom software, architecture and automation.",
+      "Software agency for startups and small businesses: automations, custom software and architecture consulting.",
     links: [{ label: "builtbyfriday.com", href: "https://builtbyfriday.com" }],
     group: "venture",
   },
