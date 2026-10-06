@@ -1,12 +1,8 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { StackTags, StatusDot, Tag } from "@/components/tag";
-import {
-  isOngoing,
-  sideProjects,
-  ventures,
-  type Project,
-} from "@/lib/projects";
+import { sideProjects, ventures, type Project } from "@/lib/projects";
+import { isOngoing } from "@/lib/utils";
 import { education, experience, skills } from "@/lib/resume";
 import { site } from "@/lib/site";
 
@@ -98,7 +94,7 @@ function ProjectRow({ project }: { project: Project }) {
   return (
     <li className="group relative border-b border-border/70 py-1.5 first:pt-0 last:border-b-0 last:pb-0">
       <div className="flex items-baseline gap-1.5">
-        <StatusDot ongoing={isOngoing(project)} className="self-center" />
+        <StatusDot ongoing={isOngoing(project.year)} className="self-center" />
         <h3 className="text-[13px] font-medium">
           <ProjectTitle project={project} />
         </h3>
@@ -158,7 +154,11 @@ export default function Home() {
                 key={`${role.company}-${role.title}`}
                 className="border-b border-border/70 pb-2 last:border-b-0 last:pb-0"
               >
-                <div className="flex items-baseline justify-between gap-2">
+                <div className="flex items-baseline gap-1.5">
+                  <StatusDot
+                    ongoing={isOngoing(role.period)}
+                    className="self-center"
+                  />
                   <h3 className="text-[13px] font-medium">
                     {role.href ? (
                       <a
@@ -173,7 +173,7 @@ export default function Home() {
                       role.company
                     )}
                   </h3>
-                  <span className="shrink-0 font-mono text-[10px] tabular-nums text-muted-foreground">
+                  <span className="ml-auto shrink-0 font-mono text-[10px] tabular-nums text-muted-foreground">
                     {role.period}
                   </span>
                 </div>
