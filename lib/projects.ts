@@ -64,7 +64,8 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-  // Ventures — the businesses. Newest first, like every other card.
+  // Ventures — the businesses. Still running first, then finished, each
+  // group newest first. Same rule in Projects below.
   {
     slug: "electrolyte",
     name: "Electrolyte",
@@ -100,18 +101,6 @@ export const projects: Project[] = [
     group: "venture",
   },
   {
-    slug: "dably",
-    name: "Dably",
-    category: "Web",
-    status: "shipped",
-    year: "2023–25",
-    stack: ["React", "FastAPI", "Supabase", "Railway"],
-    oneLiner:
-      "Education platform. CTO for the admin suite and the user-facing apps.",
-    links: [{ label: "dably.co", href: "https://dably.co" }],
-    group: "venture",
-  },
-  {
     slug: "built-by-friday",
     name: "Built By Friday",
     category: "Agency",
@@ -123,24 +112,20 @@ export const projects: Project[] = [
     links: [{ label: "builtbyfriday.com", href: "https://builtbyfriday.com" }],
     group: "venture",
   },
-
-  // Projects, newest first.
   {
-    slug: "lemonpepper",
-    name: "Lemonpepper",
-    category: "iOS",
+    slug: "dably",
+    name: "Dably",
+    category: "Web",
     status: "shipped",
-    year: "2025",
-    stack: ["SwiftUI", "FastAPI", "GPT-4", "HealthKit"],
+    year: "2023–25",
+    stack: ["React", "FastAPI", "Supabase", "Railway"],
     oneLiner:
-      "Fitness app with an AI running coach, synced to Apple Watch and Garmin.",
-    links: [
-      {
-        label: "App Store",
-        href: "https://apps.apple.com/us/app/lemonpepper/id6742935987",
-      },
-    ],
+      "Education platform. CTO for the admin suite and the user-facing apps.",
+    links: [{ label: "dably.co", href: "https://dably.co" }],
+    group: "venture",
   },
+
+  // Projects: still running first, then finished, each group newest first.
   {
     slug: "too-fast-too-slow",
     name: "Too Fast Too Slow",
@@ -154,6 +139,22 @@ export const projects: Project[] = [
       {
         label: "App Store",
         href: "https://apps.apple.com/us/app/too-fast-too-slow/id6471321976",
+      },
+    ],
+  },
+  {
+    slug: "lemonpepper",
+    name: "Lemonpepper",
+    category: "iOS",
+    status: "shipped",
+    year: "2025",
+    stack: ["SwiftUI", "FastAPI", "GPT-4", "HealthKit"],
+    oneLiner:
+      "Fitness app with an AI running coach, synced to Apple Watch and Garmin.",
+    links: [
+      {
+        label: "App Store",
+        href: "https://apps.apple.com/us/app/lemonpepper/id6742935987",
       },
     ],
   },
