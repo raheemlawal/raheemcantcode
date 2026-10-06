@@ -96,7 +96,7 @@ export type School = {
 export const education: School[] = [
   {
     name: "University of Illinois Urbana-Champaign",
-    degree: "MS Management",
+    degree: "MS Business Management",
     period: "2024–26",
     note: "Cozad New Venture Challenge, Commitment to Entrepreneurship prize",
   },
